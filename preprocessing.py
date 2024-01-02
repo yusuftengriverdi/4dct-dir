@@ -7,6 +7,8 @@ def prepro(image):
     Do image preprocessing, make the image [height, width, depth] by moving z-axis to the last index.
     """
     realigned_image = np.moveaxis(sitk.GetArrayFromImage(image), 0, -1)
+    # Background zeroing.
+    realigned_image[realigned_image == -2000] = 0
     # Normalize the image
     realigned_image = realigned_image - np.min(realigned_image)
     normalized = realigned_image / np.max(realigned_image)
@@ -30,20 +32,22 @@ def save_numpy_as_nifti(numpy_array, original_sitk_image, output_file_path):
 
 import matplotlib.pyplot as plt
 # Load and process the fixed image
+import os 
 
 for i, image_name in enumerate(['copd1', 'copd2', 'copd3', 'copd4']):
-    fixed_image = sitk.ReadImage(f"data/{image_name}_eBHCT.nii.gz")
+
+    fixed_image = sitk.ReadImage(f"data/{image_name}/{image_name}_eBHCT.nii.gz")
     image_data = prepro(fixed_image)
 
     # Save the processed image
-    output_image_path = f"data/preprocessed/{image_name}_eBHCT_pp.nii.gz"
+    output_image_path = f"data/preprocessed/{image_name}_eBHCT_bg.nii.gz"
     save_numpy_as_nifti(image_data, fixed_image, output_image_path)
 
 
 for i, image_name in enumerate(['copd1', 'copd2', 'copd3', 'copd4']):
-    fixed_image = sitk.ReadImage(f"data/{image_name}_iBHCT.nii.gz")
+    fixed_image = sitk.ReadImage(f"data/{image_name}/{image_name}_iBHCT.nii.gz")
     image_data = prepro(fixed_image)
 
     # Save the processed image
-    output_image_path = f"data/preprocessed/{image_name}_iBHCT_pp.nii.gz"
+    output_image_path = f"data/preprocessed/{image_name}_iBHCT_bg.nii.gz"
     save_numpy_as_nifti(image_data, fixed_image, output_image_path)

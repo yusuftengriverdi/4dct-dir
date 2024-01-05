@@ -399,3 +399,5 @@ FodyWeavers.xsd
 
 data/
 instructions/
+elastix*/
+params/

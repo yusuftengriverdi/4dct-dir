@@ -3,8 +3,8 @@
 # Record the start time
 start_time=$(date +%s)
 
-parameter_dir="data/preprocessed/elastix"
-input_dir="data/raw"
+parameter_dir="elastix-prep-mask-nogantry"
+input_dir="data/preprocessed"
 # List of image filenames to process
 image_list=("copd1" "copd2" "copd3" "copd4")
 

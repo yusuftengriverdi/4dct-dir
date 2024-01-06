@@ -1,6 +1,4 @@
-copd1,Accuracy,0.0
-copd1,Sensitivity,0.0
-copd1,Specifity,1.0
+Image,Metric,Value
 copd1,Normalized Mutual Information,1.1988976454422513
 copd1,Dice Coefficient,3.95040191389072e-09
 copd1,SSIM,0.8936568739684362
@@ -14,9 +12,6 @@ copd1,Cross Correlation Min Quantile (0.10),0.0008399767261865439
 copd1,Mean Cross Correlation,0.012762287440336641
 copd1,Standard Deviation Cross Correlation,0.01307722583925302
 copd1,Computational Time (s),13.554803133010864
-copd2,Accuracy,0.0
-copd2,Sensitivity,0.0
-copd2,Specifity,1.0
 copd2,Normalized Mutual Information,1.176416661774648
 copd2,Dice Coefficient,1.8706954250679747e-10
 copd2,SSIM,0.937909125068974
@@ -30,9 +25,6 @@ copd2,Cross Correlation Min Quantile (0.10),0.0007850824550524021
 copd2,Mean Cross Correlation,0.01267969276612615
 copd2,Standard Deviation Cross Correlation,0.013157325249352524
 copd2,Computational Time (s),11.523499727249146
-copd3,Accuracy,0.0
-copd3,Sensitivity,0.0
-copd3,Specifity,1.0
 copd3,Normalized Mutual Information,1.2485909501115793
 copd3,Dice Coefficient,2.977474703565477e-10
 copd3,SSIM,0.9458329542830471
@@ -46,9 +38,6 @@ copd3,Cross Correlation Min Quantile (0.10),0.00085229407185256
 copd3,Mean Cross Correlation,0.012807268799571682
 copd3,Standard Deviation Cross Correlation,0.013033176215187113
 copd3,Computational Time (s),14.55677843093872
-copd4,Accuracy,0.0
-copd4,Sensitivity,0.0
-copd4,Specifity,1.0
 copd4,Normalized Mutual Information,1.2001408325961036
 copd4,Dice Coefficient,3.104622499760572e-10
 copd4,SSIM,0.8870514677520566

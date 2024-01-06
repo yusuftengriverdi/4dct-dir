@@ -8,34 +8,34 @@ import numpy as np
 import math
 import os 
 
-def accuracy_sensitivity_specificity(kp1, kp2, tolerance=1e-5):
-    """
-    Compute accuracy, sensitivity, and specificity between x, y, z points of two sets of keypoints.
+# def accuracy_sensitivity_specificity(kp1, kp2, tolerance=1e-5):
+#     """
+#     Compute accuracy, sensitivity, and specificity between x, y, z points of two sets of keypoints.
 
-    Parameters:
-    - kp1, kp2: Numpy arrays or lists representing keypoints. Each keypoint is assumed to have (x, y, z) coordinates.
-    - tolerance: Tolerance level for considering a match.
+#     Parameters:
+#     - kp1, kp2: Numpy arrays or lists representing keypoints. Each keypoint is assumed to have (x, y, z) coordinates.
+#     - tolerance: Tolerance level for considering a match.
 
-    Returns:
-    - accuracy: Accuracy score between the two sets of keypoints.
-    - sensitivity: Sensitivity (true positive rate).
-    - specificity: Specificity (true negative rate).
-    """
-    assert len(kp1) == len(kp2), "Key point sets must have the same length."
-    num_matches = sum(np.all(np.abs(np.array(p1) - np.array(p2)) < tolerance) for p1, p2 in zip(kp1, kp2))
+#     Returns:
+#     - accuracy: Accuracy score between the two sets of keypoints.
+#     - sensitivity: Sensitivity (true positive rate).
+#     - specificity: Specificity (true negative rate).
+#     """
+#     assert len(kp1) == len(kp2), "Key point sets must have the same length."
+#     num_matches = sum(np.all(np.abs(np.array(p1) - np.array(p2)) < tolerance) for p1, p2 in zip(kp1, kp2))
     
-    true_positives = num_matches
-    true_negatives = len(kp1) - num_matches
+#     true_positives = num_matches
+#     true_negatives = len(kp1) - num_matches
 
-    # Assuming positive class represents a match
-    total_positives = len(kp1)
-    total_negatives = len(kp1)
+#     # Assuming positive class represents a match
+#     total_positives = len(kp1)
+#     total_negatives = len(kp1)
 
-    accuracy = num_matches / len(kp1)
-    sensitivity = true_positives / total_positives
-    specificity = true_negatives / total_negatives
+#     accuracy = num_matches / len(kp1)
+#     sensitivity = true_positives / total_positives
+#     specificity = true_negatives / total_negatives
 
-    return accuracy, sensitivity, specificity
+#     return accuracy, sensitivity, specificity
 
 
 def dice3d(im1, im2):
@@ -161,7 +161,7 @@ class FullReport():
             pred_keypoint_list = inhale_keypoint_list
 
         # Use imported metrics to measure and log
-        accuracy, sensitivity, specificity = accuracy_sensitivity_specificity(exhale_keypoint_list, pred_keypoint_list)
+        # accuracy, sensitivity, specificity = accuracy_sensitivity_specificity(exhale_keypoint_list, pred_keypoint_list)
 
         norm_error = [ 
             linalg.norm(np.array(p_fixed) - np.array(p_moving))
@@ -181,9 +181,9 @@ class FullReport():
 
 
         # Log the metrics
-        self._log_metric('Accuracy', accuracy)
-        self._log_metric('Sensitivity', sensitivity)
-        self._log_metric('Specifity', specificity)
+        # self._log_metric('Accuracy', accuracy)
+        # self._log_metric('Sensitivity', sensitivity)
+        # self._log_metric('Specifity', specificity)
 
         self._log_metric('Normalized Mutual Information', nmi)
         self._log_metric('Dice Coefficient', dice_coefficient)
@@ -206,27 +206,34 @@ class FullReport():
 if __name__ == '__main__':
     import SimpleITK as sitk
 
+    algorithm = 'elastix-prep-mask-nogantry'
     for i, image_name in enumerate(['copd1', 'copd2', 'copd3', 'copd4']):
         # Step 1: Load 3D Images and Key Points
-        inhale_volume = sitk.ReadImage(f'data/{image_name}/{image_name}_iBHCT.nii.gz')  # Assuming NumPy array for 3D volume
-        exhale_volume = sitk.ReadImage(f'data/{image_name}/{image_name}_eBHCT.nii.gz')  # Assuming NumPy array for 3D volume
+        inhale_volume = sitk.ReadImage(f'data/preprocessed/{image_name}/{image_name}_iBHCT.nii.gz')  # Assuming NumPy array for 3D volume
+        exhale_volume = sitk.ReadImage(f'data/preprocessed/{image_name}/{image_name}_eBHCT.nii.gz')  # Assuming NumPy array for 3D volume
+        pred_volume = sitk.ReadImage(f'{algorithm}/{image_name}/result.1.nii')  # Assuming NumPy array for 3D volume
+
 
         inhale_volume = sitk.GetArrayFromImage(inhale_volume)
         exhale_volume = sitk.GetArrayFromImage(exhale_volume)
+        pred_volume = sitk.GetArrayFromImage(pred_volume)
 
         # Load ground truth key points for fixed and moving volumes
-        inhale_keypoints = np.loadtxt(f'data/{image_name}/{image_name}_300_iBH_xyz_r1.txt')  # NumPy array of (x, y, z) coordinates
-        exhale_keypoints = np.loadtxt(f'data/{image_name}/{image_name}_300_eBH_xyz_r1.txt') # NumPy array of (x, y, z) coordinates
+        inhale_keypoints = np.loadtxt(f'data/raw/{image_name}/{image_name}_300_iBH_xyz_r1.txt')  # NumPy array of (x, y, z) coordinates
+        exhale_keypoints = np.loadtxt(f'data/raw/{image_name}/{image_name}_300_eBH_xyz_r1.txt') # NumPy array of (x, y, z) coordinates
+        pred_keypoints = np.loadtxt(f'{algorithm}/{image_name}/output_coordinates.txt') # NumPy array of (x, y, z) coordinates
 
         voxel_spacing = np.loadtxt('voxel_spacing.txt')
 
-        full_report = FullReport(algorithm_name= 'test', image_name = f'{image_name}')
+        full_report = FullReport(algorithm_name= algorithm, image_name = f'{image_name}')
 
         # Call the measure method with ground truth key points
         full_report.measure(
             exhale_image=exhale_volume,
             inhale_image=inhale_volume,
+            pred_image=pred_volume,
             inhale_keypoint_list=inhale_keypoints,
             exhale_keypoint_list=exhale_keypoints,
+            pred_keypoint_list=pred_keypoints,
             voxel_spacing=voxel_spacing[i],
         )

@@ -1,0 +1,53 @@
+Image,Metric,Value
+copd1,Normalized Mutual Information,1.1759856852591024
+copd1,Dice Coefficient,5.814108906263749e-11
+copd1,SSIM,0.9749142073565709
+copd1,MSE,72302.88149277237
+copd1,Mean TRE,35.81184241788361
+copd1,Standard Deviation TRE,19.784521910321853
+copd1,Mean Norm Error,45.76125761897845
+copd1,Standard Deviation Norm Error,24.62987280646857
+copd1,Cross Correlation Max Quantile (0.90),0.030982737356425767
+copd1,Cross Correlation Min Quantile (0.10),0.0008453069364089399
+copd1,Mean Cross Correlation,0.012812503664322798
+copd1,Standard Deviation Cross Correlation,0.013028030020395114
+copd1,Computational Time (s),13.663208246231079
+copd2,Normalized Mutual Information,1.1289038009540668
+copd2,Dice Coefficient,5.202820286216184e-11
+copd2,SSIM,0.9655519352976996
+copd2,MSE,112125.26720753837
+copd2,Mean TRE,29.46314310838153
+copd2,Standard Deviation TRE,9.131072619086442
+copd2,Mean Norm Error,41.13898758754167
+copd2,Standard Deviation Norm Error,14.518276996212693
+copd2,Cross Correlation Max Quantile (0.90),0.0307896946865167
+copd2,Cross Correlation Min Quantile (0.10),0.0007696863489818949
+copd2,Mean Cross Correlation,0.012671853550304158
+copd2,Standard Deviation Cross Correlation,0.013164875387190163
+copd2,Computational Time (s),12.003458023071289
+copd3,Normalized Mutual Information,1.2065941504152329
+copd3,Dice Coefficient,4.9209359751869684e-11
+copd3,SSIM,0.983581671101091
+copd3,MSE,43244.51129026261
+copd3,Mean TRE,33.84776165638853
+copd3,Standard Deviation TRE,20.30373070806564
+copd3,Mean Norm Error,24.323289248334003
+copd3,Standard Deviation Norm Error,10.722449975412003
+copd3,Cross Correlation Max Quantile (0.90),0.030748419520156743
+copd3,Cross Correlation Min Quantile (0.10),0.0009078310054280119
+copd3,Mean Cross Correlation,0.012898247615192092
+copd3,Standard Deviation Cross Correlation,0.012943145862493899
+copd3,Computational Time (s),14.731812953948975
+copd4,Normalized Mutual Information,1.1793706954055996
+copd4,Dice Coefficient,4.6323795748520914e-11
+copd4,SSIM,0.9483790593626051
+copd4,MSE,125409.32568798368
+copd4,Mean TRE,47.023799569833415
+copd4,Standard Deviation TRE,26.133109988725053
+copd4,Mean Norm Error,52.46926469250917
+copd4,Standard Deviation Norm Error,27.894854889281607
+copd4,Cross Correlation Max Quantile (0.90),0.03082284612612614
+copd4,Cross Correlation Min Quantile (0.10),0.0008029847257110064
+copd4,Mean Cross Correlation,0.012725166250769106
+copd4,Standard Deviation Cross Correlation,0.013113350458631394
+copd4,Computational Time (s),14.256837368011475

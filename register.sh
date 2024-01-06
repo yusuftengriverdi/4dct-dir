@@ -4,16 +4,15 @@
 start_time=$(date +%s)
 
 # Define the paths and parameters
-elastix_fixed_input_dir="data/preprocessed"
+elastix_fixed_input_dir="data/preprocessed_gantry_removed"
+elastix_moving_input_dir="data/preprocessed_gantry_removed"
 
-# transformix_input_dir_list=("referenceSpace/probabilisticMap1.nii" "referenceSpace/probabilisticMap2.nii" "referenceSpace/probabilisticMap3.nii")
-
-elastix_moving_input_dir="data/preprocessed"
+mask_dir="data/preprocessed_segmentations/"
 
 param_affine="params/Par0003.affine.txt"
 param_elastic="params/Par0003.bs-R8-ug.txt"
 
-elastix_output_dir="elastix-prep-kp/"
+elastix_output_dir="elastix-prep-mask-nogantry/"
 # transformix_label_output_dir="registeredSet/mni/par0009/registeredLabels/"
 
 
@@ -31,7 +30,7 @@ for image_file in "${image_list[@]}"; do
   fi
 
   # Run the elastix command for the current image/patient.
-  elastix -m "$elastix_moving_input_dir/${image_file}/${image_file}_iBHCT.nii.gz" -f "$elastix_fixed_input_dir/${image_file}/${image_file}_eBHCT.nii.gz" -out "$elastix_output_subdir" -p "$param_affine" -p "$param_elastic" -fp "$elastix_moving_input_dir/${image_file}/${image_file}_eBH_xyz_r1.txt" -mp "$elastix_moving_input_dir/${image_file}/${image_file}_iBH_xyz_r1.txt" 
+  elastix -m "$elastix_moving_input_dir/${image_file}/${image_file}_iBHCT.nii.gz" -f "$elastix_fixed_input_dir/${image_file}/${image_file}_eBHCT.nii.gz" -out "$elastix_output_subdir" -p "$param_affine" -p "$param_elastic" -mMoving "$mask_dir/${image_file}/seg_lung_ours_${image_file}_iBHCT.nii.gz" -fMask "$mask_dir/${image_file}/seg_lung_ours_${image_file}_eBHCT.nii.gz"  
 
   # for map_file in "${transformix_input_dir_list[@]}"; do
   #   map_name=$(basename "$map_file" | sed 's/\..*//; s/probabilisticMap/probabilisticMap/')

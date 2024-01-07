@@ -3,7 +3,7 @@
 # Record the start time
 start_time=$(date +%s)
 
-parameter_dir="elastix-prep-mask-nogantry"
+parameter_dir="elastix-custom-prep-nogantry-mask-sparse/"
 input_dir="data/preprocessed"
 # List of image filenames to process
 image_list=("copd1" "copd2" "copd3" "copd4")
@@ -14,6 +14,7 @@ for image_file in "${image_list[@]}"; do
     transformix_parameter="$parameter_dir/$image_file/TransformParameters.1.txt"
     input_subdir="$input_dir/$image_file/${image_file}_300_iBH_xyz_r1.txt"
     output_subdir="$parameter_dir/$image_file"
+
     # Run the transformix command for the current image with the specified comment
     transformix -def "$input_subdir" -out "$output_subdir" -tp "$transformix_parameter"
   done

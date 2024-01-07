@@ -206,17 +206,19 @@ class FullReport():
 if __name__ == '__main__':
     import SimpleITK as sitk
 
-    algorithm = 'elastix-prep-mask-nogantry'
+    algorithm = 'elastix-custom-prep-nogantry-mask-sparse'
     for i, image_name in enumerate(['copd1', 'copd2', 'copd3', 'copd4']):
         # Step 1: Load 3D Images and Key Points
         inhale_volume = sitk.ReadImage(f'data/preprocessed/{image_name}/{image_name}_iBHCT.nii.gz')  # Assuming NumPy array for 3D volume
         exhale_volume = sitk.ReadImage(f'data/preprocessed/{image_name}/{image_name}_eBHCT.nii.gz')  # Assuming NumPy array for 3D volume
-        pred_volume = sitk.ReadImage(f'{algorithm}/{image_name}/result.1.nii')  # Assuming NumPy array for 3D volume
-
+        try:
+            pred_volume = sitk.ReadImage(f'{algorithm}/{image_name}/result.1.nii')  # Assuming NumPy array for 3D volume
+            pred_volume = sitk.GetArrayFromImage(pred_volume)
+        except Exception as e:
+            pred_volume = None
 
         inhale_volume = sitk.GetArrayFromImage(inhale_volume)
         exhale_volume = sitk.GetArrayFromImage(exhale_volume)
-        pred_volume = sitk.GetArrayFromImage(pred_volume)
 
         # Load ground truth key points for fixed and moving volumes
         inhale_keypoints = np.loadtxt(f'data/raw/{image_name}/{image_name}_300_iBH_xyz_r1.txt')  # NumPy array of (x, y, z) coordinates

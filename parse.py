@@ -1,6 +1,6 @@
 import re
 
-algorithm = 'elastix-prep-mask-nogantry'
+algorithm = 'elastix-custom-prep-nogantry-mask-sparse'
 for image_name in ["copd1", "copd2", "copd3", "copd4"]:
     input_file_path = f"{algorithm}/{image_name}/outputpoints.txt"  # Update with the actual file path
     output_file_path = f"{algorithm}/{image_name}/output_coordinates.txt"  # Update with the desired output file path

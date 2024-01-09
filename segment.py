@@ -7,6 +7,9 @@ from pathlib import Path
 from tqdm import tqdm
 import click
 
+# This code script was taken from following repo. We do not claim any rights and we inplace here for educational and utility purposes only. 
+# Ref: https://github.com/manasikattel/chest_ct_registration/tree/main            
+
 thispath = Path.cwd().resolve()
 
 def check_fov(img, threshold=-975):
@@ -143,10 +146,8 @@ def remove_small_3D(lung_only, vis_each_slice=False):
 
     remove_holes = morphology.remove_small_holes(lung_only,
                                                  area_threshold=width**3)
-    print("3.5", np.unique(remove_holes, return_counts=True))
     remove_objects = morphology.remove_small_objects(remove_holes,
                                                      min_size=width**3)
-    print("3.75", np.unique(remove_objects, return_counts=True))
 
     return remove_objects
 
@@ -260,16 +261,12 @@ def get_lung_segmentation(segmented, gantry_mask, visualize=False):
         Lung mask.
     """
     lung = segmented * gantry_mask
-    print("1", np.unique(lung, return_counts=True))
     lung_only = lung * (lung == np.amax(lung))
-    print("2", np.unique(lung_only, return_counts=True))
     holes_filled = remove_small_3D(lung_only, False)
-    print("3", np.unique(holes_filled, return_counts=True))
 
     kernel = morphology.ball(6)
     closed = morphology.closing(holes_filled, kernel)
     dilated = morphology.dilation(closed, kernel)
-    print("4", np.unique(dilated, return_counts=True))
 
     if visualize:
         fig, ax = plt.subplots(1, 3, figsize=(10, 5))
@@ -316,7 +313,6 @@ def main(dataset_option='preprocessed_challenge',
 
         if save_lung_mask:
             lung_mask = get_lung_segmentation(segmented, gantry_mask)
-            print("5", np.unique(lung_mask, return_counts=True))
             lung_mask = sitk.GetImageFromArray(lung_mask.astype(np.uint8))
             lung_mask.CopyInformation(ct_image)
             dataset_ = dataset_option.split('_')[0]

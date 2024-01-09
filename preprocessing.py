@@ -47,20 +47,20 @@ def save_numpy_as_nifti(preprocessed_sitk_image, original_sitk_image, output_fil
 import matplotlib.pyplot as plt
 # Load and process the fixed image
 
-for i, image_name in tqdm(enumerate(['copd1', 'copd2', 'copd3', 'copd4'])):
+# for i, image_name in tqdm(enumerate(['copd0', 'copd5', 'copd6'])):
 
-    fixed_image = sitk.ReadImage(f"data/{image_name}/{image_name}_eBHCT.nii.gz")
+#     fixed_image = sitk.ReadImage(f"data/challengeDay2122/{image_name}/{image_name}_eBHCT.nii.gz")
+#     image_data = prepro(fixed_image)
+
+#     # Save the processed image
+#     output_image_path = f"data/preprocessed_challenge/{image_name}_eBHCT.nii.gz"
+#     save_numpy_as_nifti(image_data, fixed_image, output_image_path)
+
+
+for i, image_name in tqdm(enumerate(['copd0', 'copd5', 'copd6'])):
+    fixed_image = sitk.ReadImage(f"data/challengeDay2122/{image_name}/{image_name}_iBHCT.nii.gz")
     image_data = prepro(fixed_image)
 
     # Save the processed image
-    output_image_path = f"data/preprocessed/{image_name}_eBHCT.nii.gz"
-    save_numpy_as_nifti(image_data, fixed_image, output_image_path)
-
-
-for i, image_name in tqdm(enumerate(['copd1', 'copd2', 'copd3', 'copd4'])):
-    fixed_image = sitk.ReadImage(f"data/{image_name}/{image_name}_iBHCT.nii.gz")
-    image_data = prepro(fixed_image)
-
-    # Save the processed image
-    output_image_path = f"data/preprocessed/{image_name}_iBHCT.nii.gz"
+    output_image_path = f"data/preprocessed_challenge/{image_name}_iBHCT.nii.gz"
     save_numpy_as_nifti(image_data, fixed_image, output_image_path)

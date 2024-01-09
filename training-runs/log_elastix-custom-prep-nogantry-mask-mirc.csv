@@ -1,0 +1,52 @@
+Image,Metric,Value
+copd1,Normalized Mutual Information,4.330907606285119
+copd1,R2,0.9987419550408957
+copd1,MSE,4.724444444444445
+copd1,Mean TRE,1.7583722196369584
+copd1,Standard Deviation TRE,2.078361246401195
+copd1,Mean Norm Error,2.2361084198290717
+copd1,Standard Deviation Norm Error,3.0287212595587047
+copd1,Mean Cross Correlation,0.012672920145431348
+copd1,Standard Deviation Cross Correlation,0.013163848652583385
+copd1,Computational Time (s),0.016474485397338867
+copd2,Normalized Mutual Information,4.019616428295847
+copd2,R2,0.9954013545676378
+copd2,MSE,8.601111111111111
+copd2,Mean TRE,3.4288625595544318
+copd2,Standard Deviation TRE,4.137800810537626
+copd2,Mean Norm Error,3.5144561898083735
+copd2,Standard Deviation Norm Error,3.6676874216938047
+copd2,Mean Cross Correlation,0.0126211461082118
+copd2,Standard Deviation Cross Correlation,0.013213496406166361
+copd2,Computational Time (s),0.00808262825012207
+copd3,Normalized Mutual Information,4.261336594744761
+copd3,R2,0.999275417372998
+copd3,MSE,1.5199999999999998
+copd3,Mean TRE,1.7171224716654554
+copd3,Standard Deviation TRE,1.5452574728185324
+copd3,Mean Norm Error,1.6719342161210282
+copd3,Standard Deviation Norm Error,1.328396016616944
+copd3,Mean Cross Correlation,0.01275136708583553
+copd3,Standard Deviation Cross Correlation,0.013087874304212717
+copd3,Computational Time (s),0.007950305938720703
+copd4,Normalized Mutual Information,4.0613919714438
+copd4,R2,0.9984632309691736
+copd4,MSE,3.164444444444445
+copd4,Mean TRE,2.0266811616761173
+copd4,Standard Deviation TRE,1.5693663696665852
+copd4,Mean Norm Error,2.3034319614003946
+copd4,Standard Deviation Norm Error,2.0463466305913234
+copd4,Mean Cross Correlation,0.01253522518206443
+copd4,Standard Deviation Cross Correlation,0.013295034636868725
+copd4,Computational Time (s),0.010091543197631836
+mean,score,value
+mean,Normalized Mutual Information,4.168313150192382
+mean,R2,0.9979704894876762
+mean,MSE,4.5025
+mean,Mean TRE,2.232759603133241
+mean,Standard Deviation TRE,2.3326964748559846
+mean,Mean Norm Error,2.431482696789717
+mean,Standard Deviation Norm Error,2.5177878321151943
+mean,Mean Cross Correlation,0.012645164630385777
+mean,Standard Deviation Cross Correlation,0.013190063499957798
+mean,Computational Time (s),0.01064974069595337

@@ -3,10 +3,10 @@
 # Record the start time
 start_time=$(date +%s)
 
-parameter_dir="elastix-custom-prep-nogantry-mask-sparse/"
-input_dir="data/preprocessed"
+parameter_dir="elastix-challenge2/"
+input_dir="data/challengeDay2122"
 # List of image filenames to process
-image_list=("copd1" "copd2" "copd3" "copd4")
+image_list=("copd0" "copd5" "copd6")
 
 # Loop through the list and process each image
 for image_file in "${image_list[@]}"; do

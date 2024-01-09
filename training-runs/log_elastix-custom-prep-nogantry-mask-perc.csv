@@ -8,7 +8,7 @@ copd1,Mean Norm Error,2.251921347708472
 copd1,Standard Deviation Norm Error,2.949946368507094
 copd1,Mean Cross Correlation,0.012672817592864469
 copd1,Standard Deviation Cross Correlation,0.013163947379816823
-copd1,Computational Time (s),0.008289098739624023
+copd1,Computational Time (s),0.0082855224609375
 copd2,Normalized Mutual Information,4.038712948633385
 copd2,R2,0.9957428630698494
 copd2,MSE,7.766666666666667
@@ -18,7 +18,7 @@ copd2,Mean Norm Error,3.3615706577885187
 copd2,Standard Deviation Norm Error,3.46407891259643
 copd2,Mean Cross Correlation,0.012620767253912557
 copd2,Standard Deviation Cross Correlation,0.013213858266349377
-copd2,Computational Time (s),0.0070836544036865234
+copd2,Computational Time (s),0.009124279022216797
 copd3,Normalized Mutual Information,4.2582775235391255
 copd3,R2,0.9992597804485895
 copd3,MSE,1.5377777777777777
@@ -28,7 +28,7 @@ copd3,Mean Norm Error,1.6981323409391011
 copd3,Standard Deviation Norm Error,1.31517294907933
 copd3,Mean Cross Correlation,0.012751318809853416
 copd3,Standard Deviation Cross Correlation,0.013087921338779493
-copd3,Computational Time (s),0.008115291595458984
+copd3,Computational Time (s),0.007529497146606445
 copd4,Normalized Mutual Information,4.063924135862566
 copd4,R2,0.9984275162083391
 copd4,MSE,3.3055555555555554
@@ -38,7 +38,7 @@ copd4,Mean Norm Error,2.3196652930263393
 copd4,Standard Deviation Norm Error,2.1297463687011406
 copd4,Mean Cross Correlation,0.012534983583284703
 copd4,Standard Deviation Cross Correlation,0.01329526242416389
-copd4,Computational Time (s),0.010195732116699219
+copd4,Computational Time (s),0.008901119232177734
 mean,score,value
 mean,Normalized Mutual Information,4.167742045825427
 mean,R2,0.9980498696035802
@@ -49,4 +49,4 @@ mean,Mean Norm Error,2.4078224098656076
 mean,Standard Deviation Norm Error,2.4647361497209985
 mean,Mean Cross Correlation,0.012644971809978787
 mean,Standard Deviation Cross Correlation,0.013190247352277395
-mean,Computational Time (s),0.008420944213867188
+mean,Computational Time (s),0.00846010446548462

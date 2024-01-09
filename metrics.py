@@ -1,7 +1,7 @@
 import datetime
 import csv
 import time
-from skimage.metrics import structural_similarity, mean_squared_error, normalized_mutual_information
+from sklearn.metrics import mean_squared_error, mutual_info_score, r2_score
 from scipy import linalg
 from scipy.signal import correlate
 import numpy as np
@@ -97,12 +97,10 @@ def cross_correlation(kp1, kp2):
     norm_cross_corr = cross_corr / linalg.norm(cross_corr)
 
     # The maximum value of the cross-correlation result corresponds to the correlation peak
-    max_quantile_corr = np.quantile(norm_cross_corr, q=0.90)
     mean_corr = np.mean(norm_cross_corr)
     std_corr = np.std(norm_cross_corr)
-    min_quantile_corr = np.quantile(norm_cross_corr, q=0.10)
 
-    return mean_corr, std_corr, max_quantile_corr, min_quantile_corr
+    return mean_corr, std_corr
 
 class FullReport():
 
@@ -151,11 +149,7 @@ class FullReport():
         if pred_image is None: 
             pred_image = inhale_image
 
-        dice_coefficient = dice3d(exhale_image, pred_image)
-        ssim = structural_similarity(exhale_image, pred_image)
-        mse = mean_squared_error(exhale_image, pred_image)
-        nmi = normalized_mutual_information(exhale_image, pred_image)
-
+        # dice_coefficient = dice3d(exhale_image, pred_image)
 
         if pred_keypoint_list is None:
             pred_keypoint_list = inhale_keypoint_list
@@ -177,8 +171,10 @@ class FullReport():
         )
         ]
         
-        mean_corr, std_corr, max_quantile_corr, min_quantile_corr = cross_correlation(exhale_keypoint_list, pred_keypoint_list)
-
+        mean_corr, std_corr = cross_correlation(exhale_keypoint_list, pred_keypoint_list)
+        r2 = r2_score(exhale_keypoint_list, pred_keypoint_list)
+        mse = mean_squared_error(exhale_keypoint_list, pred_keypoint_list)
+        nmi = np.mean([mutual_info_score(exhale_keypoint_list[:, i], pred_keypoint_list[:, i]) for i in range(3)])
 
         # Log the metrics
         # self._log_metric('Accuracy', accuracy)
@@ -186,15 +182,13 @@ class FullReport():
         # self._log_metric('Specifity', specificity)
 
         self._log_metric('Normalized Mutual Information', nmi)
-        self._log_metric('Dice Coefficient', dice_coefficient)
-        self._log_metric('SSIM', ssim)
+        # self._log_metric('Dice Coefficient', dice_coefficient)
+        self._log_metric('R2', r2)
         self._log_metric('MSE', mse)
         self._log_metric('Mean TRE', np.mean(tre))
         self._log_metric('Standard Deviation TRE', np.std(tre))
         self._log_metric('Mean Norm Error', np.mean(norm_error))
         self._log_metric('Standard Deviation Norm Error', np.std(norm_error))
-        self._log_metric('Cross Correlation Max Quantile (0.90)', max_quantile_corr)
-        self._log_metric('Cross Correlation Min Quantile (0.10)', min_quantile_corr)
         self._log_metric('Mean Cross Correlation', mean_corr)
         self._log_metric('Standard Deviation Cross Correlation', std_corr)
 
@@ -206,7 +200,7 @@ class FullReport():
 if __name__ == '__main__':
     import SimpleITK as sitk
 
-    algorithm = 'elastix-custom-prep-nogantry-mask-sparse'
+    algorithm = 'elastix-custom-prep-mask-mirc'
     for i, image_name in enumerate(['copd1', 'copd2', 'copd3', 'copd4']):
         # Step 1: Load 3D Images and Key Points
         inhale_volume = sitk.ReadImage(f'data/preprocessed/{image_name}/{image_name}_iBHCT.nii.gz')  # Assuming NumPy array for 3D volume
@@ -223,7 +217,11 @@ if __name__ == '__main__':
         # Load ground truth key points for fixed and moving volumes
         inhale_keypoints = np.loadtxt(f'data/raw/{image_name}/{image_name}_300_iBH_xyz_r1.txt')  # NumPy array of (x, y, z) coordinates
         exhale_keypoints = np.loadtxt(f'data/raw/{image_name}/{image_name}_300_eBH_xyz_r1.txt') # NumPy array of (x, y, z) coordinates
-        pred_keypoints = np.loadtxt(f'{algorithm}/{image_name}/output_coordinates.txt') # NumPy array of (x, y, z) coordinates
+        
+        try:
+            pred_keypoints = np.loadtxt(f'{algorithm}/{image_name}/output_coordinates.txt') # NumPy array of (x, y, z) coordinates
+        except Exception as e:
+            pred_keypoints = None
 
         voxel_spacing = np.loadtxt('voxel_spacing.txt')
 

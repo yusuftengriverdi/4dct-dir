@@ -289,12 +289,12 @@ def get_lung_segmentation(segmented, gantry_mask, visualize=False):
     return dilated
 
 
-def main(dataset_option='preprocessed',
+def main(dataset_option='preprocessed_challenge',
          mask_creation=True,
          save_gantry_removed=True,
          save_lung_mask=True):
     datadir = thispath / Path(f"data/{dataset_option}")
-    images_files = [i for i in datadir.rglob("*.nii.gz") if "copd4" in str(i)]
+    images_files = [i for i in datadir.rglob("*.nii.gz") if "copd0" in str(i)]
     results_dir = Path(f"data/{dataset_option}_gantry_removed")
     results_dir.mkdir(parents=True, exist_ok=True)
     # Read the chest CT scan

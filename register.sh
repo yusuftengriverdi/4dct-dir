@@ -4,19 +4,21 @@
 start_time=$(date +%s)
 
 # Define the paths and parameters
-input_dir="data/preprocessed_gantry_removed"
+input_dir="data/preprocessed_challenge_gantry_removed"
 
-mask_dir="data/preprocessed_segmentations/"
+mask_dir="data/preprocessed_challenge_seg"
 
-param_affine="params/Parameter.affine.sparse.txt"
-param_elastic="params/Parameter.bsplines.sparse.txt"
+param_affine="params/Parameter.affine.perc.txt"
+param_elastic="params/Parameter.bsplines.perc.txt"
 
-elastix_output_dir="elastix-custom-prep-nogantry-mask-sparse/"
-# transformix_label_output_dir="registeredSet/mni/par0009/registeredLabels/"
-
+elastix_output_dir="elastix-challenge/"
+  # Create the 'elastixoutput' directory within the image's output directory
+  if [ ! -d "$elastix_output_dir" ]; then
+    mkdir -p "$elastix_output_dir"
+  fi
 
 # List of image filenames to process
-image_list=("copd1" "copd2" "copd3" "copd4")
+image_list=("copd0" "copd5" "copd6")
 
 # Loop through the list and process each image
 for image_file in "${image_list[@]}"; do
